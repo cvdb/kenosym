@@ -1,0 +1,310 @@
+
+<!-- saved from url=(0057)http://mathproblems.info/gam470/games/keno/prob-keno.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>Probabilities in Keno</title>
+<style type="text/css">.backpack.dropzone {
+  font-family: 'SF UI Display', 'Segoe UI';
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 150px;
+  font-weight: lighter;
+  color: white;
+  will-change: right;
+  z-index: 2147483647;
+  bottom: 20%;
+  background: #333;
+  position: fixed;
+  user-select: none;
+  transition: left .5s, right .5s;
+  right: 0px; }
+  .backpack.dropzone .animation {
+    height: 80px;
+    width: 250px;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+  .backpack.dropzone .title::before {
+    content: 'Save to'; }
+  .backpack.dropzone.closed {
+    right: -250px; }
+  .backpack.dropzone.hover .animation {
+    animation: sxt-play-anim-hover 0.91s steps(21);
+    animation-fill-mode: forwards;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+
+@keyframes sxt-play-anim-hover {
+  from {
+    background-position: 0px; }
+  to {
+    background-position: -5250px; } }
+  .backpack.dropzone.saving .title::before {
+    content: 'Saving to'; }
+  .backpack.dropzone.saving .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
+    animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+
+@keyframes sxt-play-anim-saving {
+  100% {
+    background-position: -14750px; } }
+  .backpack.dropzone.saved .title::before {
+    content: 'Saved to'; }
+  .backpack.dropzone.saved .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
+    animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+
+@keyframes sxt-play-anim-saved {
+  100% {
+    background-position: -5000px; } }
+</style></head>
+<body link="#0000ff">
+
+<center><h1>Probabilities in Keno</h1></center>
+
+
+<p>To understand keno probabilities you must first fully understand the combinatorial function.  For example, in the <a href="http://www.mdlottery.com/">Maryland lotto</a> the player picks 6 numbers out of 49.  Then the lottery will draw 6 numbers out of 49, without replacement.  The player wins the jackpot if all six numbers match (order does not matter). If you don’t know the probability of winning per game is 1 in 13,983,816 then you need to review the combinatorial function before going further.</p>
+
+<p>In keno the casino, or game machine, will draw 20 numbers out of 80, without replacement.  Before this happens the player may pick 1 to 15 (or more) numbers.  A "catch" is a number the player picked and was drawn by the casino.  A "miss" is a number of the player picked but was not drawn by the casino.  The player is paid according to the number of picks made and catches.  </p>
+
+<p>Although the player picks first the combinations get very huge when calculation the number of ways the casino can match the player’s picks.  To start with there are combin(80,20) = 3,535,316,142,212,180,000 ways the casino can draw 20 numbers out of 80.  Many calculators don’t support numbers this big.  So to keep the combinations smaller we will assume the casino draws first, but keeps the numbers secret, and player tries to match the numbers already drawn.  I assure you the math is the same either way.</p>
+
+<p>All the following images were taken from the Luxor keno rulebook.  All pays are on a "for one" basis.  In other words the player never gets his original bet back, even if he wins. </p>
+<p><img src="./Probabilities in Keno_files/spot1.JPG"></p>
+
+<center><h2>1 Spot</h2></center>
+
+<p>Let’s examine the 1 Spot card first.  Here the player just picks one number, from 1 to 80.  Then the casino will draw 20 numbers.  If one of these 20 match the player’s number then the player is paid $3 for a $1 bet.</p>
+<p>There are 80 numbers the player can pick.  20 of these will result in a winning ticket.  So the probability of winning is 20/80 = ¼.  The expected return is thus ¼ * 3 = 75%.  </p>
+
+<center><h2>2 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot2.JPG"></p>
+
+<p>We need to start using the combinatorial function for the 2 Spot card.  The player picks 2 numbers and casino must draw both of them for the player to win.  There is no consolation prize for only catching one.  There are a total of combin(80,2) = 3160 ways the player can draw 2 numbers out of 80.  However the player must draw 2 out of the casino’s 20 drawn numbers to win.  So there are only combin(20,2) = 190 ways to draw 2 winning numbers.  So the probability of winning is 190/3160 = 6.01%.  A winning $1 ticket pays $12, so the expected return is (190/3160) * $12 = 72.15%.</p>
+
+<p>Alternatively, the probability the player’s first pick will match one of the casino’s numbers is 20/80.  If it does match the probability the second pick will match one of the casino’s other 19 numbers out of 79 is 19/79.  So the probability of winning is (20/80)*(19/79) = 6.01%.</p>
+
+<center><h2>3 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot3.JPG"></p>
+
+<p>With the 3 Spot card we start having consolation prizes for not matching every pick.  First let’s determine the probability of catching all 3 marks.  There are combin(80,3) = 82,160 ways to draw 3 numbers out of 80.  To catch all three the player must pick all 3 numbers from the casino’s 20 drawn numbers.  There are combin(20,3) = 1140 ways to do this.  So the probability of catching all 3 is 1140/82160 = 1.39%.  </p>
+
+<p>There is a consolation prize for catching 2 out of 3.  Imagine the casino puts the 20 drawn numbers in a winning urn and the other 60 numbers in a losing urn.  The number of ways to catch 2 out of 3 is the number of ways to draw 2 balls from the 20 in the winning urn, which is combin(20,2) = 190.  The number of ways to draw one losing ball out of 60 is obviously 60.  So the number of ways to catch 2 out of 3 is the product of the number of ways to pick 2 winning balls from the winning urn and 1 ball from the losing urn, or 190*60 = 11,400.  We already know there are combin(80,3) = 82,160 total ways to draw 3 balls out of 80.  So the probability of catching 2 out of 3 is 11,400/82,160 = 13.88%.  </p>
+
+<p>For any bet the expected return is the dot product over every possible event of the probability and what it pays.  The following table shows every possible outcome, with the total in the bottom row.</p>
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,0)</td>	<td align="right">1140</td>	<td align="right">$42</td>	<td align="right">$47880</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,1)</td>	<td align="right">11400</td>	<td align="right">$1</td>	<td align="right">$11400</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,2)</td>	<td align="right">35400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,3)</td>	<td align="right">34220</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">82160</td>	<td align="right">$</td>	<td align="right">$59280</td>	</tr>
+
+</tbody></table>
+<font face="Arial">
+</font><p><font face="Arial">The bottom right cell shows that over all 82,160 combinations the player will get back $59,280.  So the expected return is 59280/82160 = </font><font face="Arial" size="2">72.15%.</font></p><font face="Arial" size="2">
+
+<center><h2>4 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot4.JPG"></p>
+
+
+</font><font face="Arial"><p>For the 4 Spot ticket the number of ways to catch all four is combin(20,4) = 4845.  The number of ways to catch 3 and miss one is the product of the number of ways to choose 3 out of 20 and the number of ways to choose 1 out of 60, or combin(20,3) * 60 = 1140*60 = 68,400.  The number of ways to catch 2 and miss 2 is the product of the number of watch to choose 2 out of 20 winners and 2 out of 60 losers, or combin(20,2)*combin(60,2) = 190 * 1770 = 336,300.  The following table shows all the possible outcomes.</p>
+</font>
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+
+
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,0)</td>	<td align="right">4845</td>	<td align="right">$120</td>	<td align="right">$581400</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,1)</td>	<td align="right">68400</td>	<td align="right">$3</td>	<td align="right">$205200</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,2)</td>	<td align="right">336300</td>	<td align="right">$1</td>	<td align="right">$336300</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,3)</td>	<td align="right">684400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,4)</td>	<td align="right">487635</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">1581580</td>	<td align="right">$</td>	<td align="right">$1122900</td>	</tr>
+
+</tbody></table>
+
+<font face="Arial">
+</font><p><font face="Arial">The return of the 4 Spot ticket is 1,122,900/1,581,580 = </font><font face="Arial" size="2">71.00%.</font></p><font face="Arial" size="2">
+
+<center><h2>4 Spot Special</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot4s.JPG"></p>
+
+</font><font face="Arial"><p>Next, let’s look at the 4 Spot Special.  We just worked out all the combinations, so we only need to apply them to a different pay table as follows, based on a $7 ticket.</p></font>
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+
+
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,0)</td>	<td align="right">4845</td>	<td align="right">$1360</td>	<td align="right">$6589200</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,1)</td>	<td align="right">68400</td>	<td align="right">$20</td>	<td align="right">$1368000</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,2)</td>	<td align="right">336300</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,3)</td>	<td align="right">684400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,4)</td>	<td align="right">487635</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">1581580</td>	<td align="right">$</td>	<td align="right">$7957200</td>	</tr>
+
+</tbody></table>
+
+<font face="Arial">
+<p>The expected return of the ticket is 7,957,200/1,581,580 = $5.0312.  However we must divide this by $7, the cost of the ticket, to get the expected return, which is $5.0312/$7 = 71.87%.  So, if you don’t mind extra volatility, and were going to bet $7 anyway, the 4 Spot Special is a better bet than the regular 4 Spot.</p>
+</font><font face="Arial" size="2">
+
+
+<center><h2>5 Spot</h2></center>
+
+
+</font><font face="Arial"><p><img src="./Probabilities in Keno_files/spot5.JPG" width="343" height="139"></p>
+
+<p>For the rest of the tickets I will present just the return tables.  Following is the return table for the 5 Spot.</p>
+
+</font>
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,0)</td>	<td align="right">15504</td>	<td align="right">$800</td>	<td align="right">$12403200</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,1)</td>	<td align="right">290700</td>	<td align="right">$9</td>	<td align="right">$2616300</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,2)</td>	<td align="right">2017800</td>	<td align="right">$1</td>	<td align="right">$2017800</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,3)</td>	<td align="right">6501800</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,4)</td>	<td align="right">9752700</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,5)</td>	<td align="right">5461512</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">24040016</td>	<td align="right">$</td>	<td align="right">$17037300</td>	</tr>
+
+</tbody></table>
+
+<font face="Arial"><p> </p>
+</font><p><font face="Arial">5-Spot return = $17,037,300/24,040,016 = </font><font face="Arial" size="2">70.87%</font></p><font face="Arial" size="2">
+
+
+<center><h2>6 Spot</h2></center>
+
+</font><font face="Arial"><p><img src="./Probabilities in Keno_files/spot6.JPG"></p>
+</font>
+
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">6</td>	<td align="center">combin(20,6)*combin(60,0)</td>	<td align="right">38760</td>	<td align="right">$1500</td>	<td align="right">$58140000</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,1)</td>	<td align="right">930240</td>	<td align="right">$88</td>	<td align="right">$81861120</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,2)</td>	<td align="right">8575650</td>	<td align="right">$4</td>	<td align="right">$34302600</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,3)</td>	<td align="right">39010800</td>	<td align="right">$1</td>	<td align="right">$39010800</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,4)</td>	<td align="right">92650650</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,5)</td>	<td align="right">109230240</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,6)</td>	<td align="right">50063860</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">300500200</td>	<td align="right">$</td>	<td align="right">$213314520</td>	</tr>
+</tbody></table>
+
+<font face="Arial">
+</font><p><font face="Arial">6-Spot return = </font><font face="Arial" size="2">70.99%</font></p><font face="Arial" size="2">
+
+<center><h2>7 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot7.JPG"></p>
+</font>
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">7</td>	<td align="center">combin(20,7)*combin(60,0)</td>	<td align="right">77520</td>	<td align="right">$7000</td>	<td align="right">$542640000</td>	</tr>
+<tr>	<td align="center">6</td>	<td align="center">combin(20,6)*combin(60,1)</td>	<td align="right">2325600</td>	<td align="right">$350</td>	<td align="right">$813960000</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,2)</td>	<td align="right">27442080</td>	<td align="right">$20</td>	<td align="right">$548841600</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,3)</td>	<td align="right">165795900</td>	<td align="right">$2</td>	<td align="right">$331591800</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,4)</td>	<td align="right">555903900</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,5)</td>	<td align="right">1037687280</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,6)</td>	<td align="right">1001277200</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,7)</td>	<td align="right">386206920</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">3176716400</td>	<td align="right">$</td>	<td align="right">$2237033400</td>	</tr>
+</tbody></table>
+
+
+
+<p>The 7-spot has a return of $2237033400/3176716400 = 70.42%</p>
+
+<center><h2>8 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot8.JPG"></p>
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">8</td>	<td align="center">combin(20,8)*combin(60,0)</td>	<td align="right">125970</td>	<td align="right">$20000</td>	<td align="right">$2519400000</td>	</tr>
+<tr>	<td align="center">7</td>	<td align="center">combin(20,7)*combin(60,1)</td>	<td align="right">4651200</td>	<td align="right">$1500</td>	<td align="right">$6976800000</td>	</tr>
+<tr>	<td align="center">6</td>	<td align="center">combin(20,6)*combin(60,2)</td>	<td align="right">68605200</td>	<td align="right">$90</td>	<td align="right">$6174468000</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,3)</td>	<td align="right">530546880</td>	<td align="right">$9</td>	<td align="right">$4774921920</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,4)</td>	<td align="right">2362591575</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,5)</td>	<td align="right">6226123680</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,6)</td>	<td align="right">9512133400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,7)</td>	<td align="right">7724138400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,8)</td>	<td align="right">2558620845</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">28987537150</td>	<td align="right">$</td>	<td align="right">$20445589920</td>	</tr>
+
+</tbody></table>
+
+<p>8-Spot return = $20445589920/28987537150 = 70.53%.</p>
+
+<center><h2>9 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot9.JPG"></p>
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">9</td>	<td align="center">combin(20,9)*combin(60,0)</td>	<td align="right">167960</td>	<td align="right">$25000</td>	<td align="right">$4199000000</td>	</tr>
+<tr>	<td align="center">8</td>	<td align="center">combin(20,8)*combin(60,1)</td>	<td align="right">7558200</td>	<td align="right">$4000</td>	<td align="right">$30232800000</td>	</tr>
+<tr>	<td align="center">7</td>	<td align="center">combin(20,7)*combin(60,2)</td>	<td align="right">137210400</td>	<td align="right">$300</td>	<td align="right">$41163120000</td>	</tr>
+<tr>	<td align="center">6</td>	<td align="center">combin(20,6)*combin(60,3)</td>	<td align="right">1326367200</td>	<td align="right">$43</td>	<td align="right">$57033789600</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,4)</td>	<td align="right">7560293040</td>	<td align="right">$4</td>	<td align="right">$30241172160</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,5)</td>	<td align="right">26461025640</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,6)</td>	<td align="right">57072800400</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,7)</td>	<td align="right">73379314800</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,8)</td>	<td align="right">51172416900</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,9)</td>	<td align="right">14783142660</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">231900297200</td>	<td align="right">$</td>	<td align="right">$162869881760</td>	</tr>
+
+</tbody></table>
+
+<font face="Arial">
+</font><p><font face="Arial">9 Spot Return = </font><font face="Arial" size="2">70.23%</font></p><font face="Arial" size="2">
+
+<center><h2>10 Spot</h2></center>
+
+<p><img src="./Probabilities in Keno_files/spot10.JPG" width="353" height="197"></p>
+
+</font><font face="Arial"><p>For some reason there is a $2 minimum beginning with the 10-spot.  Here is the return table for a $2 ticket.</p>
+</font>
+
+
+<table border="1" bgcolor="#E0D18B" cellspacing="0" cellpadding="3" style="font:12px Arial">
+<tbody><tr>	<td align="center">Catch</td>	<td align="center">Formula</td>	<td align="center">Combinations</td>	<td align="center">Pays</td>	<td align="center">Return</td>	</tr>
+<tr>	<td align="center">10</td>	<td align="center">combin(20,10)*combin(60,0)</td>	<td align="right">184756</td>	<td align="right">$50000</td>	<td align="right">$9237800000</td>	</tr>
+<tr>	<td align="center">9</td>	<td align="center">combin(20,9)*combin(60,1)</td>	<td align="right">10077600</td>	<td align="right">$8000</td>	<td align="right">$80620800000</td>	</tr>
+<tr>	<td align="center">8</td>	<td align="center">combin(20,8)*combin(60,2)</td>	<td align="right">222966900</td>	<td align="right">$2000</td>	<td align="right">$445933800000</td>	</tr>
+<tr>	<td align="center">7</td>	<td align="center">combin(20,7)*combin(60,3)</td>	<td align="right">2652734400</td>	<td align="right">$260</td>	<td align="right">$689710944000</td>	</tr>
+<tr>	<td align="center">6</td>	<td align="center">combin(20,6)*combin(60,4)</td>	<td align="right">18900732600</td>	<td align="right">$40</td>	<td align="right">$756029304000</td>	</tr>
+<tr>	<td align="center">5</td>	<td align="center">combin(20,5)*combin(60,5)</td>	<td align="right">84675282048</td>	<td align="right">$4</td>	<td align="right">$338701128192</td>	</tr>
+<tr>	<td align="center">4</td>	<td align="center">combin(20,4)*combin(60,6)</td>	<td align="right">242559401700</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">3</td>	<td align="center">combin(20,3)*combin(60,7)</td>	<td align="right">440275888800</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">2</td>	<td align="center">combin(20,2)*combin(60,8)</td>	<td align="right">486137960550</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">1</td>	<td align="center">combin(20,1)*combin(60,9)</td>	<td align="right">295662853200</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">0</td>	<td align="center">combin(20,0)*combin(60,10)</td>	<td align="right">75394027566</td>	<td align="right">$0</td>	<td align="right">$0</td>	</tr>
+<tr>	<td align="center">Total</td>	<td align="center"></td>	<td align="right">1646492110120</td>	<td align="right">$</td>	<td align="right">$2320233776192</td>	</tr>
+
+</tbody></table>
+
+<font face="Arial">
+<p>The $2 10-spot returns on average $1.4092.  So the expected return is $1.4092/2 = 70.46%.</p>
+
+<p> The Luxor keno rule book goes through a pick 15, plus a pick 20.  However hopefully you understand how to do the math yourself by now.</p>
+</font>
+
+</body></html>
